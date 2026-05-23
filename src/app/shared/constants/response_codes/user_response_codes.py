@@ -1,0 +1,14 @@
+
+class UserResponseCodes:
+    
+    USER_NOT_FOUND = "USER_NOT_FOUND"
+    
+    USER_CREATED = "USER_CREATED"
+    
+    USER_UPDATED = "USER_UPDATED"
+    
+    USER_DISABLE = "USER_DISABLE"
+    
+    USER_ENABLE = "USER_ENABLE"
+    
+    USER_EXIST = "USER_EXIST"
