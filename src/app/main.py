@@ -4,6 +4,7 @@ from app.shared.exceptions.app_exception import AppException
 from app.shared.handlers.exception_handler import exception_handler
 from fastapi.middleware.cors import CORSMiddleware
 from create_tables import create_tables
+from app.core.config import settings
 
 create_tables()
 
@@ -14,7 +15,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173"
+        settings.APP_CORS_ORIGIN
     ],
 
     allow_credentials=True,

@@ -10,6 +10,11 @@ class ModuleModel( Base ):
         primary_key= True
     )
     
+    modulo_Indice = Column(
+        Integer,
+        nullable= False
+    )
+    
     modulo_Nombre = Column(
         String(100),
         nullable= False

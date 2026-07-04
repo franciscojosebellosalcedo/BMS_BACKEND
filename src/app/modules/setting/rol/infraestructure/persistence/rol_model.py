@@ -13,9 +13,21 @@ class RolModel( Base ):
     )
     
     rol_Nombre = Column(
-        String(100),
+        String(60),
         nullable= False,
         unique= True
+    )
+    
+    rol_Codigo = Column(
+        String(60),
+        nullable= False,
+        default=""
+    )
+    
+    rol_Descripcion = Column(
+        String(200),
+        nullable= False,
+        default= "",
     )
     
     rol_Activo = Column(

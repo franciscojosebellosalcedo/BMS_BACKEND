@@ -12,8 +12,8 @@ class UserSeed():
             users = [
                 {
                     "usua_Nombre": "Administrador",
-                    "usua_NombreUsuario": "admin",
-                    "usua_Contrasenia": "admin2026",
+                    "usua_NombreUsuario": "fran",
+                    "usua_Contrasenia": "admin2024",
                     "usua_RolId": 1,
                     "usua_CreacionId": 1,
                     "usua_ModificacionId": 1

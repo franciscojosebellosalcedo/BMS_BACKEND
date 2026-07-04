@@ -16,6 +16,11 @@ class SubmoduleModel( Base ):
         nullable= False,
     )
     
+    submo_Indice= Column(
+        Integer,
+        nullable= False,
+    )
+    
     submo_Nombre = Column(
         String(100),
         nullable= False

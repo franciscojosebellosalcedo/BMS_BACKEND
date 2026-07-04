@@ -1,6 +1,7 @@
 
 from app.modules.auth.infraestructure.repositories.user_repository_impl import UserRepositoryImpl
-from app.modules.auth.infraestructure.repositories.rol_repository_impl import RolRepositoryImpl
+from app.modules.setting.rol.infraestructure.repositories.rol_repository_impl import RolRepositoryImpl
+from app.modules.auth.infraestructure.repositories.user_permission_repository_impl import UserPermissionRepositoryImpl
 from app.modules.auth.presentation.schemas.auth_schema import LoginSchema, RefressTokenSchema
 from app.modules.auth.application.use_cases.login_case_use import LoginCaseUse
 from app.modules.auth.application.use_cases.refress_session_use_case import RefressSessionUseCase
@@ -20,10 +21,11 @@ def login(
     db: Session = Depends( get_db )
 ):
     
-    repositoryUser = UserRepositoryImpl( db )
-    repositoryRol = RolRepositoryImpl( db )
+    repository_user = UserRepositoryImpl( db )
+    repository_rol = RolRepositoryImpl( db )
+    repository_permission = UserPermissionRepositoryImpl( db )
     
-    case_use = LoginCaseUse( repositoryUser, repositoryRol )
+    case_use = LoginCaseUse( repository_user, repository_rol, repository_permission )
     
     data = case_use.execute(body.model_dump() )
     
@@ -41,8 +43,9 @@ def refress_token(
     
     repositoryUser = UserRepositoryImpl( db )
     repositoryRol = RolRepositoryImpl( db )
+    repository_permission = UserPermissionRepositoryImpl( db )
     
-    case_use = RefressSessionUseCase(repositoryUser, repositoryRol )
+    case_use = RefressSessionUseCase(repositoryUser, repositoryRol, repository_permission )
     
     data = case_use.execute(body.refressToken)
     

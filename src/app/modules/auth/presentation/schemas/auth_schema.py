@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from app.modules.auth.presentation.schemas.user_permission_schema import UserPermissionSchema
 class CreateUserSchema( BaseModel ):
     
     usua_Nombre: str
@@ -13,7 +13,10 @@ class CreateUserSchema( BaseModel ):
     usua_CreacionId: int | None = None
     
     usua_ModificacionId: int | None = None
-    
+
+class CreateUserRequestSchema( BaseModel ):
+    user: CreateUserSchema
+    permissions: list[UserPermissionSchema]
 
 class LoginSchema( BaseModel ):
     

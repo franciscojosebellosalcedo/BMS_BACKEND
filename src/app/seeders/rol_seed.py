@@ -1,6 +1,6 @@
 
 from sqlalchemy.orm import Session
-from app.modules.auth.infraestructure.persistence.rol_model import RolModel
+from app.modules.setting.rol.infraestructure.persistence.rol_model import RolModel
 from sqlalchemy import select
 
 class RolSeed():
@@ -13,6 +13,8 @@ class RolSeed():
             roles = [
                 {
                     "rol_Nombre": "Administrador",
+                    "rol_Descripcion": "Acceso todal al sistema",
+                    "rol_Codigo": "ADMIN",
                     "rol_CreacionId": 1
                 }
             ]
@@ -20,7 +22,7 @@ class RolSeed():
             for rol in roles:
                 
                 stmt = select( RolModel ).where(
-                    RolModel.rol_Nombre == rol["rol_Nombre"]
+                    RolModel.rol_Codigo == rol["rol_Codigo"]
                 )
                 
                 exist = db.execute(stmt ).scalar_one_or_none()
@@ -28,6 +30,8 @@ class RolSeed():
                     
                     rol_new = RolModel(
                         rol_Nombre = rol["rol_Nombre"],
+                        rol_Descripcion = rol["rol_Descripcion"],
+                        rol_Codigo = rol["rol_Codigo"],
                         rol_CreacionId = rol["rol_CreacionId"]
                     )
                     

@@ -9,6 +9,12 @@ class Settings :
     
     APP_NAME = os.getenv("APP_NAME")
     
+    APP_HOST = os.getenv("APP_HOST")
+    
+    APP_RELOAD = os.getenv("APP_RELOAD")
+    
+    APP_CORS_ORIGIN = os.getenv("APP_CORS_ORIGIN")
+    
     API_PREFIX = os.getenv("API_PREFIX")
     
     MYSQL_HOST = os.getenv("MYSQL_HOST")

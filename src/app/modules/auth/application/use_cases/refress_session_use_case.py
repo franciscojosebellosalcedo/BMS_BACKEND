@@ -1,5 +1,6 @@
 from app.modules.auth.domain.repositories.user_repository import UserRepository
-from app.modules.auth.domain.repositories.rol_repository import RolRepository
+from app.modules.setting.rol.domain.repositories.rol_repository import RolRepository
+from app.modules.auth.domain.repositories.user_permission_repository import UserPermissionRepository
 from app.core.security import (
     create_access_token, create_refress_token, verify_refress_token
 )
@@ -9,9 +10,10 @@ from fastapi.encoders import jsonable_encoder
 
 class RefressSessionUseCase():
     
-    def __init__(self, repositoryUser: UserRepository, respositoryRol: RolRepository ):
-        self.repositoryUser = repositoryUser
-        self.respositoryRol = respositoryRol
+    def __init__(self, repository_user: UserRepository, respository_rol: RolRepository, respository_permission: UserPermissionRepository ):
+        self.repository_user = repository_user
+        self.respository_rol = respository_rol
+        self.respository_permission = respository_permission
         
     def execute( self , refress_token: str ):
         try:
@@ -19,8 +21,9 @@ class RefressSessionUseCase():
             usua_Id = int(payload["usua_Id"])
             usua_RolId = int(payload["usua_RolId"])
             
-            user_found = jsonable_encoder(self.repositoryUser.find_by_id( usua_Id ))
-            rol_found = jsonable_encoder(self.respositoryRol.find_by_id( usua_RolId ))
+            user_found = jsonable_encoder(self.repository_user.find_by_id( usua_Id ))
+            rol_found = jsonable_encoder(self.respository_rol.find_by_id( usua_RolId ))
+            permissions = self.respository_permission.find_all_by_id_user( usua_Id )
             
             payload_token = {
                 "usua_Id": user_found["usua_Id"],
@@ -35,6 +38,7 @@ class RefressSessionUseCase():
             data = {
                 "user": user_found,
                 "rol": rol_found,
+                "permissions": permissions,
                 "accessToken": access_token_new,
                 "refressToken": refress_token_new
             }

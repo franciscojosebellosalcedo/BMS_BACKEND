@@ -5,6 +5,7 @@ class SubModuleEntity:
     def __init__(
         self,
         submo_Id: int,
+        submo_Indice: int,
         submo_Nombre: str,
         submo_Codigo: str,
         submo_Activo: bool,
@@ -13,6 +14,7 @@ class SubModuleEntity:
         submo_Modificacion: datetime
     ):
         self.submo_Id = submo_Id
+        self.submo_Indice = submo_Indice
         self.submo_Nombre = submo_Nombre
         self.submo_Codigo = submo_Codigo
         self.submo_Activo = submo_Activo
