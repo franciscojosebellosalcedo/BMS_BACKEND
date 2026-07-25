@@ -26,7 +26,7 @@ class RolRepository( ABC ):
         pass
     
     @abstractmethod
-    def create( values: CreateRolInput):
+    def create( values: CreateRolInput)-> RolEntity:
         pass
     
     @abstractmethod

@@ -75,6 +75,7 @@ class RolRepositoryImpl( RolRepository ):
         self.db.add( rol_new )
         self.db.commit()
         self.db.refresh( rol_new )
+        
         return rol_new
     
     def update(self, id, values):

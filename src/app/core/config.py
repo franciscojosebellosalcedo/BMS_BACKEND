@@ -1,37 +1,39 @@
-
-from dotenv import load_dotenv
 import os
-load_dotenv()
+from dotenv import load_dotenv
 
-class Settings :
-    
+ENV = os.getenv("ENV", "dev")
+
+load_dotenv(f".env.{ENV}")
+
+class Settings:
+
     APP_PORT = int(os.getenv("APP_PORT"))
-    
+
     APP_NAME = os.getenv("APP_NAME")
-    
+
     APP_HOST = os.getenv("APP_HOST")
-    
+
     APP_RELOAD = os.getenv("APP_RELOAD")
-    
+
     APP_CORS_ORIGIN = os.getenv("APP_CORS_ORIGIN")
-    
+
     API_PREFIX = os.getenv("API_PREFIX")
-    
+
     MYSQL_HOST = os.getenv("MYSQL_HOST")
-    
-    MYSQL_PORT = os.getenv("MYSQL_PORT")
-    
+
+    MYSQL_PORT = int(os.getenv("MYSQL_PORT"))
+
     MYSQL_USER = os.getenv("MYSQL_USER")
-    
+
     MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
-    
+
     MYSQL_DB = os.getenv("MYSQL_DB")
-    
+
     JWT_SECRET = os.getenv("JWT_SECRET")
-    
+
     JWT_SECRET_REFRESS = os.getenv("JWT_SECRET_REFRESS")
-    
+
     JWT_ALGORITHM = os.getenv("JWT_ALGORITHM")
-    
+
 
 settings = Settings()
