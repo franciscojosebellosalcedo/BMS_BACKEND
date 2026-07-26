@@ -14,9 +14,9 @@ jobs:
 
       - run: |
           cat <<EOF> .env.prod
-          APP_NAME=${{secrets.APP_NAME}}
-          APP_HOST=${{secrets.APP_HOST}}
-          APP_PORT=${{secrets.APP_POST}}
+          APP_NAME=$APP_NAME
+          APP_HOST=$APP_HOST
+          APP_PORT=$APP_PORT
           EOF
       - run: ls
       - run: cat .env.prod
