@@ -13,6 +13,12 @@ class MenuRepositoryImpl( MenuRepository ):
     ):
         self.db = db
         
+    def get_options(self):
+        
+        stmt = select( OptionModel )
+        return self.db.execute( stmt ).scalars().all()
+        
+        
     def get_menu(self):
         
         stmt = select( ModuleModel )

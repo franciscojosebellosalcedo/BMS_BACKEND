@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.modules.auth.domain.entities.user_entity import UserEntity
 from app.modules.setting.rol.infraestructure.repositories.rol_permission_repository_impl import RolPermissionRepositoryImpl
+from app.modules.setting.rol.application.use_cases.get_rol_by_id_use_case import GetRolByIdUseCase
 from fastapi.encoders import jsonable_encoder
 
 rol_router = APIRouter(
@@ -20,6 +21,20 @@ rol_router = APIRouter(
         Depends( get_current_user )
     ]
 )
+
+@rol_router.get("/{id}")
+def get_rol_by_id(
+    id: int,
+    db: Session = Depends( get_db )
+):
+    
+    repository_rol = RolRepositoryImpl( db )
+    repository_permission = RolPermissionRepositoryImpl( db )
+    use_case = GetRolByIdUseCase( repository_rol , repository_permission )
+    
+    result = use_case.execute( id )
+    
+    return success_response(RolResponseCodes.ROL_FOUND_SUCCESS, f"Rol de id  {id} obtenido", result )
 
 @rol_router.post("/")
 def create(

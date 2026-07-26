@@ -1,0 +1,12 @@
+name: Aprendiendo GitHub Actions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  saludo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mostrar mensaje
+        run: echo "Hola desde GitHub Actions"

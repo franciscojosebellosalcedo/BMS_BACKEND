@@ -2,4 +2,5 @@
 class MenuResponseCodes:
     
     MENU_SUCCESS = "MENU_SUCCESS"
+    GET_OPTIONS_SUCCESS = "GET_OPTIONS_SUCCESS"
     MENU_ERROR = "MENU_ERROR"
