@@ -18,7 +18,7 @@ jobs:
           APP_HOST=${{secrets.APP_HOST}}
           APP_PORT=${{secrets.APP_POST}}
           EOF
-      - run: la
+      - run: ls
       - run: cat .env.prod
 
 
