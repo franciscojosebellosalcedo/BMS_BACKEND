@@ -1,19 +1,13 @@
-name: Primer workflow
+name: Mostrar poyecto
 
 on:
   workflow_dispatch:
-    inputs:
-      name: 
-        required: true
-        default: "Francisco"
-        type: string
-
 jobs:
   
-  saludar:
+  backend:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: saludar
-        run: echo "Hola ${{inputs.name}}"
+      - uses: actions/checkout@v4
+      - run: ls
+      
 
