@@ -1,12 +1,20 @@
-name: Aprendiendo GitHub Actions
+name: Primer workflow
 
 on:
   workflow_dispatch:
 
 jobs:
-  saludo:
+  
+  saludar:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: saludar
+        run: echo "Hola francisco"
+  
+  despedirse:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Mostrar mensaje
-        run: echo "Hola desde GitHub Actions"
+      - name: despedir
+        run: echo "Adios"
