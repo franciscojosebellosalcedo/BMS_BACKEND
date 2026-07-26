@@ -7,7 +7,8 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - run: ls
+      - run: echo ${{secrets.APP_NAME}}
+      - run: echo ${{secrets.APP_PORT}}
+      - run: echo ${{secrets.APP_HOST}}
       
 
