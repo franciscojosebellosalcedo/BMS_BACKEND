@@ -12,7 +12,7 @@ jobs:
     
     steps:
       - name: saludar
-        run: echo "Hola francisco"
+        run: echo "Hola pacho"
   
   despedirse:
     runs-on: ubuntu-latest
