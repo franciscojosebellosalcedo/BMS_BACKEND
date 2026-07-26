@@ -1,9 +1,12 @@
 name: Primer workflow
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      name: 
+        required: true
+        default: "Francisco"
+        type: string
 
 jobs:
   
@@ -12,11 +15,5 @@ jobs:
     
     steps:
       - name: saludar
-        run: echo "Hola pacho"
-  
-  despedirse:
-    runs-on: ubuntu-latest
+        run: echo "Hola ${{inputs.name}}"
 
-    steps:
-      - name: despedir
-        run: echo "Adios"
