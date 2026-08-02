@@ -23,7 +23,7 @@ jobs:
           MYSQL_USER: bms
           MYSQL_PASSWORD: bms
           MYSQL_ROOT_PASSWORD: bmsroot
-          MYSQL_DATABASE: bms
+          MYSQL_DATABASE: bms_test
         
           options:
             --healt-cmd="mysqladmin ping"
