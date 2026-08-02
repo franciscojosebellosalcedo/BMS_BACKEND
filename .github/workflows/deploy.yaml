@@ -53,6 +53,7 @@ jobs:
           MYSQL_HOST=localhost
           MYSQL_PORT=3306
           APP_PORT=8000
+          API_PREFIX="/api/v1/bms"
           MYSQL_USER=bms
           MYSQL_PASSWORD=bmstester
           MYSQL_DB=bms_test
