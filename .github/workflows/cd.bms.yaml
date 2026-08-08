@@ -19,3 +19,13 @@ jobs:
       - name: Verificar llave
         run: |
           ls -la ~/.ssh
+      
+      - name: Configurar permisos
+        run: chmod 600 ~/.ssh/id_ed25519
+
+      - name: Agregar servidor a known_hosts
+        run: ssh-keyscan ${{secrets.SERVER_HOST}} >> ~/.ssh/known_hosts
+
+      - name: Prueba de conexion
+        run: | 
+          ${{secrets.MYSQL_USER}}@${{secrets.MYSQL_HOST}} "echo hola mundo"
