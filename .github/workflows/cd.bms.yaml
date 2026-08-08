@@ -8,5 +8,10 @@ jobs:
   cd:
 
     runs-on: ubuntu-latest
-    env:
-      ENV: prod
+    
+    steps:
+      - name: Crear carpeta .ssh
+        run: |
+          mkdir ~/.ssh
+      - name: Mostrar contendido
+        run: ls la
