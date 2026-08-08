@@ -14,4 +14,4 @@ jobs:
         run: |
           mkdir ~/.ssh
       - name: Mostrar contendido
-        run: ls la
+        run: la
