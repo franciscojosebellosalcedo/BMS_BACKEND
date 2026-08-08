@@ -1,66 +1,62 @@
-name: Deploy
+name: CI BMS
 
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
 
-  deploy:
-
+  ci:
+    
     runs-on: ubuntu-latest
-
-    env: 
+    env:
       ENV: test
-
+    
     services:
-
       mysql:
 
         image: mysql:8.0
+        
+        ports: 
+          - 3306:3306
 
         env:
           MYSQL_USER: bms
-          MYSQL_PASSWORD: bmstester
-          MYSQL_ROOT_PASSWORD: bms
+          MYSQL_PASSWORD: bms
+          MYSQL_ROOT_PASSWORD: bmsroot
           MYSQL_DATABASE: bms_test
         
-        ports:
-          - 3306:3306
-        
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
-
+          options:
+            --healt-cmd="mysqladmin ping"
+            --healt-interval=10s
+            --healt-timeout=5s
+            --healt-retries=3
+    
     steps:
-
       - name: Clonar proyecto
         uses: actions/checkout@v5
       
       - name: Instalar python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-
-      - name: Instalar dependencias
-        run: pip install -r requirements.txt
+          python-version: 3.12
 
       - name: Agregar .env.test
         run: |
-          cat > .env.test <<EOF 
-          MYSQL_HOST=localhost
-          MYSQL_PORT=3306
-          MYSQL_USER=bms
-          MYSQL_PASSWORD=bmstester
-          MYSQL_DB=bms_test
+          cat > .env.test <<EOF
+          APP_PORT= 8000
+          API_PREFIX="/api/v1/bms"
+          MYSQL_DB = bms_test
+          MYSQL_PASSWORD= bms
+          MYSQL_USER= bms
+          MYSQL_PORT= 3306
+          MYSQL_HOST= localhost
           EOF
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
 
-      - name: Ejecutar alembic
+      - name: Ejecutar migraciones
         run: alembic upgrade head
-
+      
       - name: Ejecutar pruebas
         run: pytest -v
-
-
