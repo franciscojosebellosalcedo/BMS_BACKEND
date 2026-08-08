@@ -13,5 +13,9 @@ jobs:
       - name: Crear carpeta .ssh
         run: |
           mkdir ~/.ssh
-      - name: Mostrar contendido
-        run: la
+      - name: Agregar llave
+        run: echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_ed25519
+
+      - name: Verificar llave
+        run: |
+          ls -la ~/.ssh
