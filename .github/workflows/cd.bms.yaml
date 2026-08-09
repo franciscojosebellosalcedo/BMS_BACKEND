@@ -33,7 +33,7 @@ jobs:
 
       - name: Obtener host key
         run: |
-          ssh-keyscan -T 10 -v ${{ secrets.SERVER_HOST }}
+          ssh-keyscan -T 10 -v ${{ secrets.TAILSCALE_IP }}
 
       # - name: Agregar servidor a known_hosts
       #   run: |
