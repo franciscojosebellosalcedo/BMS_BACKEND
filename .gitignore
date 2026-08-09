@@ -2,3 +2,5 @@
 .env.test
 .env.prod
 /venv
+__pycache__/
+*.py[cod]
