@@ -26,28 +26,17 @@ jobs:
       - name: Configurar permisos
         run: |
           chmod 600 ~/.ssh/id_ed25519
-
-      - name: Verificar puerto SSH
-        run: |
-          timeout 10 bash -c "</dev/tcp/${{ secrets.TAILSCALE_IP  }}/22"
-
-      - name: Obtener host key
-        run: |
-          ssh-keyscan -T 10 -v ${{ secrets.TAILSCALE_IP }}
-
       - name: Agregar servidor a known_hosts
         run: |
           ssh-keyscan ${{ secrets.TAILSCALE_IP }} >> ~/.ssh/known_hosts
 
-      - name: Información del servidor
+      - name: Actualizar proyecto
         run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.TAILSCALE_IP }} "
-            echo 'Usuario:'
-            whoami
-
-            echo 'Servidor:'
-            hostname
-
-            echo 'Directorio actual:'
-            pwd
+          ssh ${{secrets.SERVER_USER}}@${{secrets.TAILSCALE_IP}} "
+          cd ~/projects/bms/BMS_BACKEND &&
+          git pull origin main &&
+          source .venv/bin/activate &&
+          pip install -r requirements.txt &&
+          alembic upgrade head &&
+          python src/run.py
           "
