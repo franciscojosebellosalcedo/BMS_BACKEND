@@ -26,10 +26,10 @@ jobs:
           MYSQL_DATABASE: bms_test
         
           options:
-            --healt-cmd="mysqladmin ping"
-            --healt-interval=10s
-            --healt-timeout=5s
-            --healt-retries=3
+            --health-cmd="mysqladmin ping"
+            --health-interval=10s
+            --health-timeout=5s
+            --health-retries=3
     
     steps:
       - name: Clonar proyecto
