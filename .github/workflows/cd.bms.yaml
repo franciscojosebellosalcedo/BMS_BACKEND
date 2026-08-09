@@ -29,8 +29,8 @@ jobs:
 
       - name: Agregar servidor a known_hosts
         run: |
-          ssh-keyscan ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan ${{ secrets.TAILSCALE_IP }} >> ~/.ssh/known_hosts
 
       - name: Probar SSH
         run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "echo Hola desde GitHub Actions"
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.TAILSCALE_IP }} "echo Hola desde GitHub Actions"
