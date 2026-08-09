@@ -15,11 +15,22 @@ jobs:
         with:
           authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
       
-      - name: Verificar tailscale
+      - name: Crear carpeta SSH
         run: |
-          tailscale status
+          mkdir -p ~/.ssh
 
-      - name: Verificar conexion
+      - name: Agregar llave privada
         run: |
-          tailscale ping ${{secrets.TAILSCALE_IP}}
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
 
+      - name: Configurar permisos
+        run: |
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Agregar servidor a known_hosts
+        run: |
+          ssh-keyscan ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Probar SSH
+        run: |
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "echo Hola desde GitHub Actions"
