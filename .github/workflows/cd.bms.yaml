@@ -39,6 +39,15 @@ jobs:
         run: |
           ssh-keyscan ${{ secrets.TAILSCALE_IP }} >> ~/.ssh/known_hosts
 
-      - name: Probar SSH
+      - name: Información del servidor
         run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.TAILSCALE_IP }} "echo Hola desde GitHub Actions"
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.TAILSCALE_IP }} "
+            echo 'Usuario:'
+            whoami
+
+            echo 'Servidor:'
+            hostname
+
+            echo 'Directorio actual:'
+            pwd
+          "
