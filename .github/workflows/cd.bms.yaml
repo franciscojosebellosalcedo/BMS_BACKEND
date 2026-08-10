@@ -30,30 +30,14 @@ jobs:
         run: |
           ssh-keyscan ${{ secrets.TAILSCALE_IP }} >> ~/.ssh/known_hosts
 
-      - name: Verificar conexión y permisos
+          
+      - name: Actualizar proyecto
         run: |
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.TAILSCALE_IP }} "
-            echo 'Usuario:'
-            whoami
-
-            echo 'IP:'
-            hostname -I
-
-            echo 'Sudo:'
-            sudo -n -l
-
-            echo 'Servicio:'
-            sudo -n systemctl is-active bms-backend
+            cd ~/projects/bms/BMS_BACKEND &&
+            git pull origin main &&
+            .venv/bin/pip install -r requirements.txt &&
+            .venv/bin/alembic upgrade head &&
+            sudo -n systemctl restart bms-backend &&
+            sudo -n systemctl is-active --quiet bms-backend
           "
-      # - name: Actualizar proyecto
-      #   run: |
-      #     ssh ${{secrets.SERVER_USER}}@${{secrets.TAILSCALE_IP}} "
-      #     cd ~/projects/bms/BMS_BACKEND &&
-      #     git pull origin main &&
-      #     source .venv/bin/activate &&
-      #     pip install -r requirements.txt &&
-      #     export ENV=prod &&
-      #     alembic upgrade head &&
-      #     sudo -n systemctl restart bms-backend &&
-      #     sudo -n systemctl is-active --quiet bms-backend
-      #     "
