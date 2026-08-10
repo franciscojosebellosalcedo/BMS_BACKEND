@@ -1,12 +1,15 @@
 name: CD BMS
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["CI BMS"]
+    types: 
+      - completed
 
 jobs:
 
   cd:
-
+    if: ${{github.event.workflow_run.conclusion == 'success'}}
     runs-on: ubuntu-latest
     
     steps:
