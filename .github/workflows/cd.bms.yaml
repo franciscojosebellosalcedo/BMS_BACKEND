@@ -30,12 +30,12 @@ jobs:
         run: |
           ssh-keyscan ${{ secrets.TAILSCALE_IP }} >> ~/.ssh/known_hosts
 
-          
       - name: Actualizar proyecto
         run: |
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.TAILSCALE_IP }} "
             cd ~/projects/bms/BMS_BACKEND &&
             git pull origin main &&
+            export ENV=prod &&
             .venv/bin/pip install -r requirements.txt &&
             .venv/bin/alembic upgrade head &&
             sudo -n systemctl restart bms-backend &&
