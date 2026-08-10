@@ -39,5 +39,6 @@ jobs:
           pip install -r requirements.txt &&
           export ENV=prod &&
           alembic upgrade head &&
-          sudo -n systemctl restart bms-backend
+          sudo -n systemctl restart bms-backend &&
+          sudo -n systemctl is-active --quiet bms-backend
           "
