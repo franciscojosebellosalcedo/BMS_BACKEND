@@ -38,5 +38,6 @@ jobs:
             export ENV=prod &&
             .venv/bin/pip install -r requirements.txt &&
             .venv/bin/alembic upgrade head &&
-            sudo systemctl restart bms-backend
+            sudo systemctl restart bms-backend &&
+            sudo systemctl is-active --quiet bms-backend
           "
